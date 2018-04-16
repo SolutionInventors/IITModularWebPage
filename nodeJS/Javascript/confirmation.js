@@ -20,6 +20,7 @@ function imageChange(event) {
         escape(JSON.stringify(student));
     document.getElementById('submit-form-button').disabled = false; 
 }
+
 function removeAllSpaces(str) {
     while (str.lastIndexOf(' ') >= 0) {
         str = str.replace(' ', ''); 

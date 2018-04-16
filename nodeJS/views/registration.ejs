@@ -1,0 +1,555 @@
+<html>
+<head>
+
+    <title></title>
+    <script type="text/javascript" src="../Javascript/utils.js"></script>
+    <script type="text/javascript" src="../Javascript/registration-form.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+    <link rel="stylesheet" type="text/css" href="../css/registration-form.css">
+
+
+</head>
+<body>
+
+    <header>
+        <h2>MODULAR REGISTRATION FORM</h2>
+
+    </header>
+
+
+    <!-- Tab links -->
+
+    
+    <div class="tab">
+        <button id="personal-data-button"class="tablinks"  >Personal Details</button>
+        <button id="educational-background-button" class="tablinks" >Educational Background</button>
+        <button id="experience-button" class="tablinks"  >Experience</button>
+        <button id="finance-button" class="tablinks" >Sponsor</button>
+        <button id="how-you-heard-button" class="tablinks" >How You Heard</button>
+        <button id="available-courses-button" class="tablinks">Programs</button>
+
+    </div>
+
+	<!-- Required Data Flag--> 
+	
+	<ul id = "requiredList" class = "requiredList input-list">
+		<li> Some required fields are missing
+	</ul>
+	
+    <!-- Tab content -->
+
+    <form name="submitData" enctype="multipart/form-data" method="post" action="/submitJson">
+        <div id="finance" class="tabcontent">
+
+            <ul class="input-list">
+                <li>
+                    <h3>
+                        If you have any sponsor please input his informations.
+                        Click on the next button when you are done
+                    </h3>
+                </li>
+
+                <li>
+                    <label>First Name: </label>
+                    <input id="sponsor-first-name" type="text" placeholder="eg. John">
+
+                </li>
+                <li>
+                    <label>Last Name: </label>
+                    <input id="sponsor-last-name" type="text" placeholder="eg. John">
+
+                </li>
+
+                <li>
+                    <label>Address</label>
+                    <input id="sponsor-address" type="text">
+                </li>
+
+
+                <li>
+                    <label>Telephone: </label>
+                    <input id="sponsor-phone-number" type="text" placeholder="seperate multiple phone number with a semi-colon (;)" />
+                </li>
+                <li>
+                    <label>Email</label>
+                    <input id="sponsor-email" type="text" placeholder="eg. emial@email.com">
+                </li>
+                <li>
+                    <input type="button" value="Previous" onclick="openTab('experience')">
+                    <input type="button" value="Next" onclick="openHowYouHeard()">
+                </li>
+            </ul>
+
+
+        </div>
+        <div id="how-you-heard" class="tabcontent">
+
+
+            <ul class="input-list checkbox">
+                <li><h3> How did you hear about the Institute for Industrial Technology(IIT)</h3></li>
+
+                <li>
+                    <div>
+                        <input type="checkbox" id="iit-website-checkbox" data-value="IIT Web Site">
+                        <label for="iit-website-checkbox"></label>
+                    </div>
+                    <span>IIT Web Site</span>
+                </li>
+                <li>
+                    <div>
+                        <input type="checkbox" id="iit-brochure-checkbox" data-value="IIT Brochure">
+                        <label for="iit-brochure-checkbox"></label>
+                    </div>
+                    <spam>IIT prospectus/brochure</spam>
+                </li>
+                <li>
+                    <div>
+                        <input type="checkbox" id="from-tutor-checkbox" data-value="Tutor or Supervisor">
+                        <label for="from-tutor-checkbox"></label>
+                    </div>
+                    <span>From Tutor or Supervisor</span>
+                </li>
+                <li>
+                    <div>
+                        <input type="checkbox" id="iit-student-checkbox" data-value="From IIT Student">
+                        <label for="iit-student-checkbox"></label>
+                    </div><span> From IIT Student</span>
+                </li>
+                <li>
+                    <div>
+                        <input type="checkbox" id="employer-checkbox" data-value="My Employer">
+                        <label for="employer-checkbox"></label>
+                    </div>
+                    <span>My Employer</span>
+
+                </li>
+                <li>
+                    <div>
+                        <input type="checkbox" id="previous-student-checkbox" data-value="Former IIT Student">
+                        <label for="previous-student-checkbox"></label>
+                    </div>
+
+                    <span>Former IIT Student </span>
+                </li>
+                <li>
+                    <input type="button" value="Previous" onclick="openTab('finance')">
+                    <input type="button" value="Next" onclick="recordHowYouHeard()">
+
+                </li>
+            </ul>
+
+
+        </div>
+
+        <div id="personal-data" class="tabcontent" onkeyup="enableButton(event, 'Next')">
+            <ul class="input-list">
+                <li><h3>Enter Personal Info</h3></li>
+                <li>
+                    <label>Title <em>*</em></label>
+                    <input id="title" type="text" placeholder="eg Mr/Mrs/Dr/Engr etc" maxlength="20">
+                </li>
+                <li>
+                    <label>First Name: <em>*</em></label>
+                    <input id="firstName" type="text" placeholder="eg. John">
+                </li>
+                <li>
+                    <label>Last Name: <em>*</em></label>
+                    <input id="lastName" type="text" placeholder="eg.Doug">
+                </li>
+
+                <li>
+                    <label>Email: <em>*</em></label>
+                    <input id="email" type="text" placeholder="eg email@email.com">
+
+                </li>
+                <li>
+                    <label>Date of Birth: <em>*</em></label>
+
+
+                    <select class="day" id="dob-day" placeholder="dd">
+                        <% for(let i = 1; i<= 31; i++   ) { %>
+
+                        <option tag= <%=i %> value=<%=i %> ><%=i%></option>
+                        <% } %>
+                    </select>
+                    <select class="month" id="dob-month"  onchange="updateDayList(event)">
+                        <option value="0">Jan</option>
+                        <option value="1">Feb</option>
+                        <option value="2">Mar</option>
+                        <option value="3">Apr</option>
+                        <option value="4">May</option>
+                        <option value="5">June</option>
+                        <option value="6">July</option>
+                        <option value="7">Aug</option>
+                        <option value="8">Sep</option>
+                        <option value="9">Oct</option>
+                        <option value="10">Nov</option>
+                        <option value="11">Dec</option>
+                    </select>
+
+                    <select class="year" id="dob-year" placeholder="dd">
+                        <% for(let i = currentDate.getFullYear() - 90; i<= currentDate.getFullYear() -16 ; i++   ) { %>
+                        <option value=<%=i %> ><%=i%></option>
+                        <% } %>
+                    </select>
+
+                </li>
+                <li>
+                    <label>Place of Birth: <em>*</em></label>
+                    <input id="pob" type="text">
+                </li>
+                <li>
+                    <label>Religion: <em>*</em></label>
+                    <select id='religionOptions'>
+                        <option>Christian</option>
+                        <option>Muslim </option>
+                        <option>Traditional </option>
+                        <option>Buddist</option>
+                        <option>Others</option>
+                    </select>
+                    <input id="religionTxtBox" type="text" placeholder="Please specify" hidden="true">
+                </li>
+                <li>
+                    <label>Current Address <em>*</em></label>
+                    <input id="current-address" type="text" placeholder="">
+
+                </li>
+                <li>
+                    <label>Gender: </label>
+                    <select id='gender'>
+                        <option value='Male'>Male</option>
+                        <option value='Female'>Female</option>
+
+                    </select>
+
+                </li>
+                <li>
+                    <label>Permanent Address <em>*</em></label>
+                    <input id="permanent-address" type="text" placeholder="">
+
+                </li>
+
+                <li>
+                    <label>State Of Origin: <em>*</em></label>
+                    <input id="state-of-origin" type="text" placeholder="">
+                </li>
+                <li>
+                    <label>Country of Origin: <em>*</em></label>
+                    <input id="country" type="text" placeholder="">
+                </li>
+                <li>
+                    <label>Telephone: <em>*</em></label>
+                    <input id="phone" type="text" placeholder="seperate  with a semi-colon (;)">
+                </li>
+
+
+                <li><input type="button" value="Next" onclick="createPersonalData()" disabled></li>
+
+            </ul>
+
+        </div>
+
+        <div id="educational-background" class="tabcontent" onkeyup="enableButton(event, 'Next', 'main-education-data')">
+            <ul class="input-list" id="main-education-data">
+                <li><h3>Educational Info</h3></li>
+                <li>
+                    <label>Last institute attended: <em>*</em></label>
+                    <input id="last-institute-attended" type="text" placeholder="">
+                </li>
+                <li>
+                    <label>Highest qualification: <em>*</em></label>
+                    <input id="highest-qualification" type="text" placeholder="">
+                </li>
+                <li>
+                    <label>What course did you study: <em>*</em></label>
+                    <input id="course-studied" type="text" placeholder="">
+                </li>
+
+            </ul>
+            <ul class="input-list" id="schools-attended" onkeyup="enableButton(event, 'Add')">
+                <li><h4> Add at least one institutions you have attended</h4></li>
+                <li>
+                    <label>Name of Institution: </label>
+                    <input id="institute-name" type="text" placeholder="">
+                </li>
+                <li>
+                    <label>Begin Date: </label>
+
+                    <select id="edu-begin-month" class="month">
+                        <option value="0">Jan</option>
+                        <option value="1">Feb</option>
+                        <option value="2">Mar</option>
+                        <option value="3">Apr</option>
+                        <option value="4">May</option>
+                        <option value="5">June</option>
+                        <option value="6">July</option>
+                        <option value="7">Aug</option>
+                        <option value="8">Sep</option>
+                        <option value="9">Oct</option>
+                        <option value="10">Nov</option>
+                        <option value="11">Dec</option>
+                    </select>
+
+                    <select class="year" id="edu-begin-year" placeholder="dd">
+                        <% for(let i = currentDate.getFullYear() - 60; i<= currentDate.getFullYear(); i++   ) { %>
+                        <option value=<%=i %> ><%=i%></option>
+                        <% } %>
+                    </select>
+
+                </li>
+                <li>
+                    <label>End Date: </label>
+                    <select id="edu-end-month" class="month">
+                        <option value="0">Jan</option>
+                        <option value="1">Feb</option>
+                        <option value="2">Mar</option>
+                        <option value="3">Apr</option>
+                        <option value="4">May</option>
+                        <option value="5">June</option>
+                        <option value="6">July</option>
+                        <option value="7">Aug</option>
+                        <option value="8">Sep</option>
+                        <option value="9">Oct</option>
+                        <option value="10">Nov</option>
+                        <option value="11">Dec</option>
+                    </select>
+                    <select class="year" id="edu-end-year" placeholder="dd">
+                        <% for(let i = currentDate.getFullYear() - 60; i<= currentDate.getFullYear(); i++   ) { %>
+                        <option value=<%=i %> ><%=i%></option>
+                        <% } %>
+                    </select>
+
+                </li>
+                <li>
+                    <label>Course Read: </label>
+                    <input id="edu-course-read" type="text" placeholder="e.g. O'level, Medicine etc.">
+                </li>
+                <li>
+                    <label>Certification: </label>
+                    <input id="certificate" type="text" placeholder="eg  Waec, Nabteb, Bsc etc">
+
+                </li>
+
+                <li>
+
+                    <input type="button" value="Add" onclick="updateEducation(event)" disabled>
+                    <span class="nav-buttons">
+                        <input type="button" value="Previous" onclick="openTab('personal-data')">
+                        <input type="button" value="Next" onclick="moveToExperience(event)" disabled>
+                    </span>
+
+                </li>
+
+            </ul>
+            <table class="inputed-data-table">
+                <thead>
+
+
+                    <tr>
+                        <th>Institute</th>
+                        <th>Course Read</th>
+                        <th>Certificate</th>
+                        <th>Begin Date</th>
+                        <th>End Date</th>
+                    </tr>
+                </thead>
+
+
+                <tbody id="edu-table-body">
+                    <tr hidden="hidden">
+                        <td>Institute for Industrial Tchnology</td>
+                        <td>Electrotechnics</td>
+                        <td>Certificate</td>
+                        <td>20-10-2017</td>
+                        <td>10-10-2000</td>
+                        <td><input type="button" value="Edit" onclick="editTable(event)" /></td>
+                        <td><input type="button" value="Remove" onclick="removeRow(event)"></td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+
+        <div id="experience" class="tabcontent" onkeyup="enableButton(event, 'Next', 'key-exp-details')" >
+
+
+            <ul class="input-list" id="key-exp-details">
+                <li> <h3>Input Work Details</h3></li>
+                <li>
+                    <label>Where do work <em>*</em></label>
+                    <input id="current-work-place" type="text" placeholder="enter current workplace">
+
+                </li>
+
+                <li>
+                    <label>Years Experience<em>*</em></label>
+                    <select class ="year" id="years-experience" placeholder="eg 5 or 1 or 0" min="0" >
+                        <% for(let i = 1 ; i<= 7; i+=2){ %>
+
+                        <option value=<%=i%> ><%=i%> years</option>
+
+                        <% } %>
+                        <% for(let i = 10 ; i<= 30; i+=5){ %>
+
+                        <option value=<%=i%> ><%=i%> years</option>
+
+
+                        <% } %>
+                        <option value=31>above 30  years</option>
+                    </select>
+                    
+                </li>
+            </ul>
+            <ul class="input-list" id="experience-list" onkeyup="enableButton(event, 'Add')">
+
+                <li><h4>  Input the places you have worked if any</h4></li>
+                <li>
+                    <label>Employer </label>
+                    <input id="employer" type="text" placeholder="">
+                </li>
+                <li>
+                    <label>Job Title </label>
+                    <input id="jobTitle" type="text" placeholder="eg Manager, Engineer, Intern etc">
+
+                </li>
+                <li>
+
+                    <label>Begin Date:</label>
+                    <select id="exp-begin-month" class="month">
+                        <option value="0">Jan</option>
+                        <option value="1">Feb</option>
+                        <option value="2">Mar</option>
+                        <option value="3">Apr</option>
+                        <option value="4">May</option>
+                        <option value="5">June</option>
+                        <option value="6">July</option>
+                        <option value="7">Aug</option>
+                        <option value="8">Sep</option>
+                        <option value="9">Oct</option>
+                        <option value="10">Nov</option>
+                        <option value="11">Dec</option>
+                    </select>
+
+                    <select class="year" id="exp-begin-year" placeholder="dd">
+                        <% for(let i = currentDate.getFullYear() - 60; i<= currentDate.getFullYear(); i++   ) { %>
+                        <option value=<%=i %> ><%=i%></option>
+                        <% } %>
+                    </select>
+
+                </li>
+                <li>
+                    <label>End Date: </label>
+                    <select id="exp-end-month" class="month">
+                        <option value="0">Jan</option>
+                        <option value="1">Feb</option>
+                        <option value="2">Mar</option>
+                        <option value="3">Apr</option>
+                        <option value="4">May</option>
+                        <option value="5">June</option>
+                        <option value="6">July</option>
+                        <option value="7">Aug</option>
+                        <option value="8">Sep</option>
+                        <option value="9">Oct</option>
+                        <option value="10">Nov</option>
+                        <option value="11">Dec</option>
+                    </select>
+                    <select class="year" id="exp-end-year" placeholder="dd">
+                        <% for(let i = currentDate.getFullYear() - 60; i<= currentDate.getFullYear(); i++   ) { %>
+                        <option value=<%=i %> ><%=i%></option>
+                        <% } %>
+                    </select>
+
+
+                </li>
+
+                <li>
+                    <label>Your Responsibility </label>
+                    <textarea id="responsibilities" placeholder="Seperate each with a semicolon(;) "></textarea>
+                </li>
+                <li>
+                    <input type="button" value="Add" onclick='appendExperience()' disabled>
+                    <span class="nav-buttons">
+                        <input type="button" value="Previous" onclick="openTab('educational-background')">
+                        <input type="button" value="Next" onclick='moveToFinanceTab()' disabled>
+                    </span>
+
+                </li>
+
+
+            </ul>
+            <table class="inputed-data-table">
+                <thead>
+                    <tr>
+                        <th>Employer</th>
+                        <th>Job Title</th>
+                        <th>Begin Date</th>
+                        <th>End Date</th>
+                        <th>Responsibility</th>
+                    </tr>
+                </thead>
+
+
+                <tbody id="exp-table-body">
+                    <tr data-tabName="experience" hidden="hidden">
+                        <td>Cadbury</td>
+                        <td>Intern</td>
+                        <td>20-10-2017</td>
+                        <td>10-10-2000</td>
+                        <td>Certificate</td>
+                        <td><input type="button" value="Edit" onclick="editTable(event)"></td>
+                        <td><input type="button" value="Remove" onclick="removeRow(event)"></td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+
+
+        <div id="available-courses" class="tabcontent">
+            <ul id="course-list" class="input-list">
+                <li><h3>Select a course from the list</h3></li>
+                <% courses.forEach((item) => { %>
+
+                <li>
+
+                    <span class="radio">
+
+                        <input id=<%=  escape(item.name) %> type="radio" name="course-option" value =<%=  escape(item.name)%> />
+                        <label for=<%= escape(item.name)%>></label>
+
+                    </span>  
+                    <span class="radio-side">
+                        <%= item.name%>
+                    </span>
+                </li>
+
+               
+                <%}); %>
+
+                <li>
+
+                    <input id="json-text" hidden="hidden" name="jsonData" type="text" value="" />
+                    <input type="button" value="Previous" onclick="openTab('how-you-heard' )" />
+                    <input type="submit" value="Submit" onmouseover="updateJSON(event)"  />
+
+
+                </li>
+            </ul>
+
+        </div>
+    </form>
+    <footer>
+      <% include partials/footer%>
+
+    </footer>
+
+	<script> 
+		checkCookie();
+        openTab( 'available-courses') ;
+
+	</script>
+</body>
+</html>

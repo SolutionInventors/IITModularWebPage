@@ -1,0 +1,72 @@
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript" src="../Javascript/utils.js"></script>
+	<script type="text/javascript" src="../Javascript/confirmation.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+
+</head>
+    
+<body>
+    <header>
+        <h2>MODULAR REGISTRATION FORM</h2>
+
+    </header>
+    <!-- tabs-->
+    <div class="tab">
+        <button id= "modules-button" class="tablinks" onclick="openTab(event, 'modules')">Modules</button>
+        <button id= "confirmation-button" class="tablinks" onclick="openTab(event,'confirmation')">Confirmation</button>
+
+    </div>
+
+    <div class="tabcontent" id="modules">
+        <ul class="input-list checkbox">
+            <li><h4>Select modules you are interested in: </h4></li>
+           
+            <% modules.forEach((item)=> { %>
+
+            <li>
+                <div>
+                    <input name="modules" type="checkbox" id= <%=escape(`${item.name}-checkbox`)%> value=<%=escape(item.name)%> />
+                    <label for= <%=escape(`${item.name}-checkbox`) %>></label>
+                </div>
+                <span><%=item.name%></span>
+            </li>
+
+            <% });%> 
+            
+            <li><input type="button" value="Next"  onclick="openTab( 'confirmation')"/></li>
+        </ul>
+    </div>
+    <!-- tabcontents-->
+    
+    <div id="confirmation" class="tabcontent">
+         <form method ="post" enctype="multipart/form-data" action="/registerStudent">
+             <ul class="input-list">
+                 <li><p>A confirmation number was sent to <%=email%>  </p></li>
+                 <li><h4>TYPE IN CONFIRMATION NUMBER</h4></li>
+                  <li><label>Enter Number: </label><input type="text" id="inputed-number" name="inputedNumber" /></li>
+                 <li><input name="data" id="jsonInput" type="hidden" value= <%= escape(json)%> /></li>
+                 <li><input id="hashed-number" name="hashedNumber" type="hidden" value= <%=escape(randStr)%> /></li>
+                 <li><input id="mail" type="hidden" value=<%=email%> /></li>
+                <li>
+                     <label>Attach Photograph: </label>
+
+                     <input name="image" type="file" accept="image/*" id="student-image" onchange="imageChange(event)">
+                 </li>
+                 <li>
+                     <div id="student-image-view">
+                     </div>
+                 </li>
+                 <li><input type="button"value="Previous" onclick="openTab( 'modules')"/> 
+                 <input id="submit-form-button" type="submit" value="SUBMIT" onmouseover=updateObject(event) disabled/></li>
+
+             </ul>
+
+         </form>
+        
+    </div>
+	<script>openTab( 'modules') ;</script> 
+</body>
+</html>

@@ -1,0 +1,46 @@
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript" src="../Javascript/initial.js"></script>
+    <script type="text/javascript" src="../Javascript/functions.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+
+</head>
+    
+<body>
+    <header>
+        <h2>MODULAR REGISTRATION FORM</h2>
+
+    </header>
+    <!-- tabs-->
+    <div class="tab">
+        <button class="tablinks" onclick="openTab(event, 'modules')">Modules</button>
+        <button class="tablinks" onclick="openTab(event,'confirmation')">Confirmation</button>
+
+    </div>
+
+    <!-- tabcontents-->
+    <div class="tabcontent" id="modules">
+        <ul class="input-list checkbox">
+            <li><h4>Select modules you are interested in: </h4></li>
+            <li>
+                <div>
+                    <input type="checkbox" id="basic-electrics-checkbox" data-value="IIT Web Site">
+                    <label for="basic-electrics-checkbox"></label>
+                </div>
+                <spam>Basic Electrics</spam>
+            </li>
+        </ul>
+    </div>
+    <div id="confirmation" class="tabcontent">
+        <ul class="input-list">
+            <li><h4>A confirmation number was sent to your mail </h4></li>
+            <li>TYPE IN CONFIRMATION NUMBER</li>
+            <li><input type="text" /></li>
+            <li><input type="button" value="CONFIRM" /></li>
+        </ul>
+    </div>
+
+</body>
+</html>

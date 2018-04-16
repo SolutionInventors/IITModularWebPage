@@ -1,0 +1,32 @@
+.inputed-data-table thead {
+    width: 60%;
+    font-weight: bold;
+    color: inherit;
+    font-size: 18px;
+}
+.inputed-data-table {
+    width: 80%;
+    font-size: 16px;
+    padding-left: 10%;
+    text-align: center;
+    display: none;
+}
+
+    .inputed-data-table thead {
+        width: 60%;
+        font-weight: bold;
+        color: inherit;
+        font-size: 18px;
+    }
+
+tr {
+    border-width: 1px;
+}
+
+#advertTxt {
+    display: none;
+}
+
+#otherMeansTxt {
+    display: none;
+}

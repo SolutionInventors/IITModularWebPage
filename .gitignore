@@ -1,2 +1,6 @@
-/.vs
-/nodeJS/styles.css
+.vs
+
+/node_modules/
+nodeJS/node_modules/
+node_modules/
+/nodeJS/node_modules/
